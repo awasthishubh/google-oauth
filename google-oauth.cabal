@@ -13,13 +13,28 @@ build-type:          Simple
 extra-source-files:  ChangeLog.md
 cabal-version:       >=1.10
 
+library
+  exposed-modules:      Code2token
+                      , Token2info
+  hs-source-dirs:       module
+  build-depends:        base >=4.9 && <4.10
+  default-language:     Haskell2010
+
+
 executable google-oauth
   main-is:             Main.hs
-  -- other-modules:       
+  -- other-modules:        Code2token    
   -- other-extensions:    
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.9 && <4.10
+                     , google-oauth
                      , scotty
                      , text
+                     , http-types
+                     , wai-extra
+                     , cookie
+                     , bytestring
+                     , blaze-builder
+                     , blaze-html
   hs-source-dirs:      src
   default-language:    Haskell2010
