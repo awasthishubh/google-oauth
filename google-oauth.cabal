@@ -36,6 +36,7 @@ executable google-oauth
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.9 && <4.10
                      , google-oauth
+                     , aeson
                      , scotty
                      , text
                      , http-types
