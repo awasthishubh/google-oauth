@@ -29,7 +29,7 @@ main = do
             redirect $ L.pack url
 
         get "/" $ do
-            cont <- liftIO $ readFile "/home/shubh/Desktop/haskell/google-oauth/html/home.html"
+            cont <- liftIO $ readFile "./html/home.html"
             html $ L.replace "{{baseURL}}" (L.pack baseURL) $ L.pack cont
         get "/callback" $ do
             state <- param "state"
