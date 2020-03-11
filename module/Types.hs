@@ -1,5 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Types where
+	import Data.Aeson
 	import Data.Aeson.Types
 
 	data Token = Token String String deriving(Show)
@@ -12,4 +13,12 @@ module Types where
 					"grant_type" .= grant_type,
 					"code" .= code,
 					"redirect_uri" .= redirect_uri
+				]
+	
+	data Cred = Cred String String deriving(Show)
+	instance ToJSON Cred where
+		toJSON (Cred client_id client_secret) = object
+				[
+					"client_id" .= client_id,
+					"client_secret" .= client_secret
 				]
