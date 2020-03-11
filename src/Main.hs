@@ -15,6 +15,7 @@ import System.Environment
 main::IO ()
 main = do
     port <- read <$> getEnv "PORT"
+    baseURL <- getEnv "baseURL":: IO String
     scotty port $ do
         get "/auth" $ do
             client_id <- param "client_id"
@@ -24,14 +25,14 @@ main = do
                         ++"response_type=code"
                         ++"&scope=https://www.googleapis.com/auth/userinfo.profile+https://www.googleapis.com/auth/userinfo.email&"
                         ++"client_id="++(client_id)++"&"
-                        ++"redirect_uri=http://localhost:3000/callback&"
+                        ++"redirect_uri="++(baseURL)++"/callback&"
                         ++"access_type=offline&prompt=consent&"
                         ++"state="++state
             redirect $ L.pack url
 
         get "/" $ do
             cont <- liftIO $ readFile "/home/shubh/Desktop/haskell/google-oauth/html/home.html"
-            html $ L.pack cont
+            html $ L.replace "{{baseURL}}" (L.pack baseURL) $ L.pack cont
         get "/callback" $ do
             state <- param "state"
             let justCred= decode (Char8.pack state) :: Maybe Cred
