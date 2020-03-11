@@ -22,3 +22,6 @@ module Types where
 					"client_id" .= client_id,
 					"client_secret" .= client_secret
 				]
+	instance FromJSON Cred where
+		parseJSON = withObject "cred" $ \o ->
+			Cred <$> o .: "client_id" <*> o .: "client_secret"
