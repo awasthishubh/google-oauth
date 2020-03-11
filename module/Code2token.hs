@@ -12,9 +12,8 @@ module Code2token where
 	getPar (Just a) = a
 	getPar _ = ""
 					
-	getToken :: String->String->String->String->String->IO Token
-	getToken client_id client_secret grant_type code redirect_uri = do
-		let auth =Auth client_id client_secret grant_type code redirect_uri  
+	getToken :: Auth->IO Token
+	getToken auth = do
 		manager <- newManager tlsManagerSettings
 
 		let request 

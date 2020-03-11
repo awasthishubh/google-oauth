@@ -37,9 +37,10 @@ main = scotty 3000 $ do
             grant_type="authorization_code" 
             redirect_uri="http://localhost:3000/callback"
         code <- param "code"
-        tokens <- liftIO $ C.getToken (getID cred) (getSec cred) grant_type code redirect_uri
+        let auth = Auth (getID cred) (getSec cred) grant_type code redirect_uri  
+        tokens <- liftIO $ C.getToken auth
         let access_code = getAcc tokens
         liftIO $ putStrLn access_code
         userInfo <- liftIO $ TI.getInfo access_code
-        Web.Scotty.json userInfo
+        Web.Scotty.json $ CombineInfo userInfo tokens auth
 
