@@ -4,10 +4,8 @@ import Control.Monad.IO.Class
 import qualified Code2token as C
 import Token2info as TI
 import Types
-import qualified Data.Text as T
 import qualified Data.Text.Lazy as L
 import Data.Aeson
-import qualified Data.ByteString.Lazy as B
 import qualified Data.ByteString.Lazy.Char8 as Char8
 import Func
 import System.Environment
