@@ -28,7 +28,8 @@ main = scotty 3000 $ do
         redirect $ L.pack url
 
     get "/" $ do
-        html "Hello World!"
+        cont <- liftIO $ readFile "/home/shubh/Desktop/haskell/google-oauth/html/home.html"
+        html $ L.pack cont
     get "/callback" $ do
         state <- param "state"
         let justCred= decode (Char8.pack state) :: Maybe Cred
