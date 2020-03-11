@@ -1,26 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Code2token where
-	-- import qualified Data.ByteString.Lazy.Char8 as L8
 	import           Network.HTTP.Client        (defaultManagerSettings, newManager)
 	import           Network.HTTP.Simple
 	import			 Network.HTTP.Client.TLS
 	import           Data.Aeson 
 	import Data.Aeson.Types
-	-- import Data.Aeson.Types(Parser(..))
+	import Types
 
-	data Token = Token String String deriving(Show)
-
-	data Auth = Auth String String String String String
-	instance ToJSON Auth where
-		toJSON (Auth client_id client_secret grant_type code redirect_uri) = object
-				[
-					"client_id" .= client_id,
-					"client_secret" .= client_secret,
-					"grant_type" .= grant_type,
-					"code" .= code,
-					"redirect_uri" .= redirect_uri
-				]
-	
 	getPar :: Maybe String -> String
 	getPar Nothing = ""
 	getPar (Just a) = a
